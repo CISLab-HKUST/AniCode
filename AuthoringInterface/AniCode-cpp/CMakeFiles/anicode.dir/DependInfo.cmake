@@ -1,22 +1,18 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
   )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/disk1/home/graphicslab/AniCode/AniCode-cpp/authorCapture.cpp" "/disk1/home/graphicslab/AniCode/AniCode-cpp/CMakeFiles/anicode.dir/authorCapture.cpp.o"
-  "/disk1/home/graphicslab/AniCode/AniCode-cpp/keyframe.cpp" "/disk1/home/graphicslab/AniCode/AniCode-cpp/CMakeFiles/anicode.dir/keyframe.cpp.o"
-  "/disk1/home/graphicslab/AniCode/AniCode-cpp/main.cpp" "/disk1/home/graphicslab/AniCode/AniCode-cpp/CMakeFiles/anicode.dir/main.cpp.o"
-  "/disk1/home/graphicslab/AniCode/AniCode-cpp/utils.cpp" "/disk1/home/graphicslab/AniCode/AniCode-cpp/CMakeFiles/anicode.dir/utils.cpp.o"
-  "/disk1/home/graphicslab/AniCode/AniCode-cpp/viewerCapture.cpp" "/disk1/home/graphicslab/AniCode/AniCode-cpp/CMakeFiles/anicode.dir/viewerCapture.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "."
-  "/disk1/home/graphicslab/anaconda3/include"
-  "/disk1/home/graphicslab/anaconda3/include/opencv"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/authorCapture.cpp" "CMakeFiles/anicode.dir/authorCapture.cpp.o" "gcc" "CMakeFiles/anicode.dir/authorCapture.cpp.o.d"
+  "/Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/keyframe.cpp" "CMakeFiles/anicode.dir/keyframe.cpp.o" "gcc" "CMakeFiles/anicode.dir/keyframe.cpp.o.d"
+  "/Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/main.cpp" "CMakeFiles/anicode.dir/main.cpp.o" "gcc" "CMakeFiles/anicode.dir/main.cpp.o.d"
+  "/Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/utils.cpp" "CMakeFiles/anicode.dir/utils.cpp.o" "gcc" "CMakeFiles/anicode.dir/utils.cpp.o.d"
+  "/Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/viewerCapture.cpp" "CMakeFiles/anicode.dir/viewerCapture.cpp.o" "gcc" "CMakeFiles/anicode.dir/viewerCapture.cpp.o.d"
   )
 
 # Targets to which this target links.

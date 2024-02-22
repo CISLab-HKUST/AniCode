@@ -6,10 +6,16 @@ import os
 # below is to import zxing from absolute path
 import importlib.util
 import sys
-spec = importlib.util.spec_from_file_location("zxing", "/usr/local/lib/python3.6/dist-packages/zxing/__init__.py")
-zxing = importlib.util.module_from_spec(spec)
-sys.modules[spec.name] = zxing
-spec.loader.exec_module(zxing)
+from pyzxing import BarCodeReader
+import ssl
+
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
+# spec = importlib.util.spec_from_file_location("zxing", "/usr/local/lib/python3.6/dist-packages/zxing/__init__.py")
+# zxing = importlib.util.module_from_spec(spec)
+# sys.modules[spec.name] = zxing
+# spec.loader.exec_module(zxing)
 
 app = Flask(__name__)
 # cors = CORS(app)
@@ -48,12 +54,14 @@ def authoring():
 			img = img[int((h-3*w/4)/2) : int((h-3*w/4)/2 + 3*w/4), :]
 		cv2.imwrite(foldername + "img_author.png", img)
 		# detect QR code
-		reader = zxing.BarCodeReader()
-		barcode = reader.decode(foldername + "img_author.png", try_harder=True)
-		if barcode is None:
+		reader = BarCodeReader()
+		barcode = reader.decode(foldername + "img_author.png")
+		barcode_data = barcode[0]
+		if barcode_data is None or 'points' not in barcode_data.keys():
 			flash("Reference QR undetectable! Please print a bigger QR code and take the picture again.")
 			return redirect(url_for("upload"))
-		qrpoints = [barcode.points[0][0], barcode.points[0][1], barcode.points[1][0], barcode.points[1][1], barcode.points[2][0], barcode.points[2][1], barcode.points[3][0], barcode.points[3][1]]
+		points = barcode_data['points']
+		qrpoints = [points[0][0], points[0][1], points[1][0], points[1][1], points[2][0], points[2][1], points[3][0], points[3][1]]
 		# resize to 640x480
 		h = img.shape[0]
 		ratio = h / 480

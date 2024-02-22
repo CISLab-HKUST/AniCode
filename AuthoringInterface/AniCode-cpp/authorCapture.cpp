@@ -56,14 +56,14 @@ bool authorCapture(string write_img_file, string write_qrpos_file) {
         
     }
     
-    if (!videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, captureWidth)) {
+    if (!videoCapture.set(CAP_PROP_FRAME_WIDTH, captureWidth)) {
         
         // Log
         cerr << "Failed to set frame width: " << captureWidth << " (ignoring)" << endl;
         
     }
     
-    if (!videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, captureHeight)) {
+    if (!videoCapture.set(CAP_PROP_FRAME_HEIGHT, captureHeight)) {
         
         // Log
         cerr << "Failed to set frame height: " << captureHeight << " (ignoring)" << endl;
@@ -86,7 +86,7 @@ bool authorCapture(string write_img_file, string write_qrpos_file) {
         if (result) {
             
             // Convert to grayscale
-            cvtColor(image, grey, CV_BGR2GRAY);
+            cvtColor(image, grey, COLOR_BGR2GRAY);
             frame = image.clone();
             
             try {

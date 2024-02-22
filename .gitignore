@@ -1,0 +1,6 @@
+userdata_*/
+*pycache*/
+*.csv
+.idea/
+.vscode/
+CMakeFiles/

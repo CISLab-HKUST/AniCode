@@ -230,7 +230,7 @@ void add_keyframe(Mat& old_inpainted, Mat& src, Keyframe* curr_keyframe_base, Vi
 //        dilate(mask, mask, element);
         
         Mat src_hsv;
-        cvtColor(src, src_hsv, CV_BGR2HSV);
+        cvtColor(src, src_hsv, COLOR_BGR2HSV);
         // Apply color transformation
         for (int i = 0; i <= fps * curr_keyframe_base->duration; i++) {
             float delta_hue_curr = curr_keyframe->delta_hue * i / (float)(fps * curr_keyframe_base->duration);
@@ -282,7 +282,7 @@ void add_keyframe(Mat& old_inpainted, Mat& src, Keyframe* curr_keyframe_base, Vi
                 }
             }
         }
-        putText(src_annotated, curr_keyframe->annotation.c_str(), Point(20, 40), cv::FONT_HERSHEY_DUPLEX, 1.0, cv::Scalar(255, 255, 255), 1, CV_AA);
+        putText(src_annotated, curr_keyframe->annotation.c_str(), Point(20, 40), cv::FONT_HERSHEY_DUPLEX, 1.0, cv::Scalar(255, 255, 255), 1, LINE_AA);
         for (int i = 0; i <= fps * curr_keyframe_base->duration; i++) {
             vout.write(src_annotated);
         }
