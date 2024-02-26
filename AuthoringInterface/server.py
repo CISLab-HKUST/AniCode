@@ -33,6 +33,7 @@ def upload():
 @app.route("/authoring", methods=["GET", "POST"])
 def authoring():
 	if request.method == "POST":
+		global foldername
 		foldername = "static/userdata_" + request.remote_addr + "/"
 		os.system("mkdir %s" % foldername)
 		filename = "test.jpg"
@@ -78,7 +79,6 @@ def authoring():
 def finish():
 	if request.method == "POST":
 		authored_qr = request.form.get("authored_qr")
-		foldername = "userdata_" + request.remote_addr + "/"
 		with open(foldername + "qr.txt", "w") as qrfile:
 			qrfile.write(authored_qr)
 		os.system("cd %s && ./match img_author.png qr.txt" % foldername)
