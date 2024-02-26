@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/anicode.dir/all
+all: CMakeFiles/animate.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/anicode.dir/clean
+clean: CMakeFiles/animate.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/anicode.dir
+# Target rules for target CMakeFiles/animate.dir
 
 # All Build rule for target.
-CMakeFiles/anicode.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target anicode"
-.PHONY : CMakeFiles/anicode.dir/all
+CMakeFiles/animate.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target animate"
+.PHONY : CMakeFiles/animate.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/anicode.dir/rule: cmake_check_build_system
+CMakeFiles/animate.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/anicode.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/animate.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/huanghongbin/Local/AniCode/AuthoringInterface/AniCode-cpp/CMakeFiles 0
-.PHONY : CMakeFiles/anicode.dir/rule
+.PHONY : CMakeFiles/animate.dir/rule
 
 # Convenience name for target.
-anicode: CMakeFiles/anicode.dir/rule
-.PHONY : anicode
+animate: CMakeFiles/animate.dir/rule
+.PHONY : animate
 
 # clean rule for target.
-CMakeFiles/anicode.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/clean
-.PHONY : CMakeFiles/anicode.dir/clean
+CMakeFiles/animate.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/clean
+.PHONY : CMakeFiles/animate.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

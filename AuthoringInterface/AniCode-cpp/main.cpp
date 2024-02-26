@@ -45,6 +45,11 @@ using namespace zxing::qrcode;
 using namespace cv;
 using namespace cv::ximgproc;
 
+// 确保TYPE_VALUE始终被定义
+#ifndef TYPE_VALUE
+#define TYPE_VALUE 0
+#endif
+
 enum Functionality{AUTHOR_TAKING_PIC, VIEWER_TAKING_PIC, ANIMATING, SEGMENTATION};
 /***
 To build the binary segment
@@ -69,7 +74,54 @@ To build the binary animate
  ***/
 int main(int argc, char** argv) {
     string directory = "";
+
     int active_functionality = SEGMENTATION;
+    bool is_matching = false;
+
+    switch (TYPE_VALUE) {
+        // segment
+        case 0: {
+            active_functionality = SEGMENTATION;
+            is_matching = false;
+            if (argc != 2 && argc != 8) {
+                cerr << "Usage: ./segment src_img.jpg" << endl;
+                cerr << "Optionally set the range for parameters: ./segment src_img.jpg region_size_from region_size_to ratio_from ratio_to num_iterations_from num_iterations_to" << endl;
+                return -1;
+            }
+        }
+            break;
+
+        // match
+        case 1: {
+            active_functionality = SEGMENTATION;
+            is_matching = true;
+            if (argc != 3) {
+                cerr << "Usage: ./match src_img.jpg qr.txt" << endl;
+                cerr << "Only works for files in the current folder due to the path of masks!" << endl;
+                return -1;
+            }
+        }
+            break;
+
+        // animate
+        case 2: {
+            active_functionality = ANIMATING;
+            if (argc != 4) {
+                cerr << "Usage: ./animate src_img.png qr.txt dst_video.avi" << endl;
+                cerr << "Only works for files in the current folder due to the path of masks!" << endl;
+                return -1;
+            }
+        }
+            break;
+
+        // unknown    
+        default: {
+            std::cout << "Hoben Unknown type" << std::endl;
+            return -1;
+        }
+            break;
+    }
+
     // if (argc != 4) {
     //     cerr << "Usage: ./animate src_img.png qr.txt dst_video.avi" << endl;
     //     cerr << "Only works for files in the current folder due to the path of masks!" << endl;
@@ -80,11 +132,11 @@ int main(int argc, char** argv) {
     //     cerr << "Only works for files in the current folder due to the path of masks!" << endl;
     //     return -1;
     // }
-    if (argc != 2 && argc != 8) {
-        cerr << "Usage: ./segment src_img.jpg" << endl;
-        cerr << "Optionally set the range for parameters: ./segment src_img.jpg region_size_from region_size_to ratio_from ratio_to num_iterations_from num_iterations_to" << endl;
-        return -1;
-    }
+    // if (argc != 2 && argc != 8) {
+    //    cerr << "Usage: ./segment src_img.jpg" << endl;
+    //    cerr << "Optionally set the range for parameters: ./segment src_img.jpg region_size_from region_size_to ratio_from ratio_to num_iterations_from num_iterations_to" << endl;
+    //    return -1;
+    // }
 //        directory = "/Users/wangzeyu/Desktop/AuthoringAnimation/AnimationDemo/";
 //        cout << "Please specify a functionality code\n0: author takes picture,\n1: viewer takes picture,\n2: generate animation,\n3: image segmentation\n";
 //        cin >> active_functionality;
@@ -126,7 +178,6 @@ int main(int argc, char** argv) {
     } else if (active_functionality == SEGMENTATION) {
         // Turn this off when doing image segmentation for the author
         // Turn this on when doing image segmentation for the viewer
-        bool is_matching = false;
         Mat src = imread(directory + argv[1]/*"img_author.jpg"*/);
         resize(src, src, Size(640, 480));
         string png_filename = argv[1];

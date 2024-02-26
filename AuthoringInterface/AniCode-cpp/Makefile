@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named anicode
+# Target rules for targets named animate
 
 # Build rule for target.
-anicode: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 anicode
-.PHONY : anicode
+animate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 animate
+.PHONY : animate
 
 # fast build rule for target.
-anicode/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/build
-.PHONY : anicode/fast
+animate/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/build
+.PHONY : animate/fast
 
 authorCapture.o: authorCapture.cpp.o
 .PHONY : authorCapture.o
 
 # target to build an object file
 authorCapture.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/authorCapture.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/authorCapture.cpp.o
 .PHONY : authorCapture.cpp.o
 
 authorCapture.i: authorCapture.cpp.i
@@ -142,7 +142,7 @@ authorCapture.i: authorCapture.cpp.i
 
 # target to preprocess a source file
 authorCapture.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/authorCapture.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/authorCapture.cpp.i
 .PHONY : authorCapture.cpp.i
 
 authorCapture.s: authorCapture.cpp.s
@@ -150,7 +150,7 @@ authorCapture.s: authorCapture.cpp.s
 
 # target to generate assembly for a file
 authorCapture.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/authorCapture.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/authorCapture.cpp.s
 .PHONY : authorCapture.cpp.s
 
 keyframe.o: keyframe.cpp.o
@@ -158,7 +158,7 @@ keyframe.o: keyframe.cpp.o
 
 # target to build an object file
 keyframe.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/keyframe.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/keyframe.cpp.o
 .PHONY : keyframe.cpp.o
 
 keyframe.i: keyframe.cpp.i
@@ -166,7 +166,7 @@ keyframe.i: keyframe.cpp.i
 
 # target to preprocess a source file
 keyframe.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/keyframe.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/keyframe.cpp.i
 .PHONY : keyframe.cpp.i
 
 keyframe.s: keyframe.cpp.s
@@ -174,7 +174,7 @@ keyframe.s: keyframe.cpp.s
 
 # target to generate assembly for a file
 keyframe.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/keyframe.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/keyframe.cpp.s
 .PHONY : keyframe.cpp.s
 
 main.o: main.cpp.o
@@ -182,7 +182,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -190,7 +190,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -198,7 +198,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 utils.o: utils.cpp.o
@@ -206,7 +206,7 @@ utils.o: utils.cpp.o
 
 # target to build an object file
 utils.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/utils.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/utils.cpp.o
 .PHONY : utils.cpp.o
 
 utils.i: utils.cpp.i
@@ -214,7 +214,7 @@ utils.i: utils.cpp.i
 
 # target to preprocess a source file
 utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/utils.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/utils.cpp.i
 .PHONY : utils.cpp.i
 
 utils.s: utils.cpp.s
@@ -222,7 +222,7 @@ utils.s: utils.cpp.s
 
 # target to generate assembly for a file
 utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/utils.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/utils.cpp.s
 .PHONY : utils.cpp.s
 
 viewerCapture.o: viewerCapture.cpp.o
@@ -230,7 +230,7 @@ viewerCapture.o: viewerCapture.cpp.o
 
 # target to build an object file
 viewerCapture.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/viewerCapture.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/viewerCapture.cpp.o
 .PHONY : viewerCapture.cpp.o
 
 viewerCapture.i: viewerCapture.cpp.i
@@ -238,7 +238,7 @@ viewerCapture.i: viewerCapture.cpp.i
 
 # target to preprocess a source file
 viewerCapture.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/viewerCapture.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/viewerCapture.cpp.i
 .PHONY : viewerCapture.cpp.i
 
 viewerCapture.s: viewerCapture.cpp.s
@@ -246,7 +246,7 @@ viewerCapture.s: viewerCapture.cpp.s
 
 # target to generate assembly for a file
 viewerCapture.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/anicode.dir/build.make CMakeFiles/anicode.dir/viewerCapture.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animate.dir/build.make CMakeFiles/animate.dir/viewerCapture.cpp.s
 .PHONY : viewerCapture.cpp.s
 
 # Help Target
@@ -257,7 +257,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... anicode"
+	@echo "... animate"
 	@echo "... authorCapture.o"
 	@echo "... authorCapture.i"
 	@echo "... authorCapture.s"
