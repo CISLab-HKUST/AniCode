@@ -33,7 +33,7 @@ def upload():
 @app.route("/authoring", methods=["GET", "POST"])
 def authoring():
 	if request.method == "POST":
-		foldername = "userdata_" + request.remote_addr + "/"
+		foldername = "static/userdata_" + request.remote_addr + "/"
 		os.system("mkdir %s" % foldername)
 		filename = "test.jpg"
 		if "img" not in request.files:

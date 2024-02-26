@@ -266,8 +266,9 @@ function uploadImage() {
     //     scene_name = "demo_test/";
     // }
     // scene_name = "demo_test/";
-    // uploadedImage.src = scene_name + "img_author.png";
-    uploadedImage.src = "http://tracer.cs.yale.edu:2018/get_userdata?file=img_author.png";
+    scene_name = "./static/userdata_127.0.0.1/";
+    uploadedImage.src = scene_name + "img_author.png";
+    // uploadedImage.src = "http://tracer.cs.yale.edu:2018/get_userdata?file=img_author.png";
     // TODO random ordering of 5 examples
     console.log("new image");
     document.getElementById("param1").disabled = false;
@@ -1430,8 +1431,8 @@ function update() {
         undoImageList = [];
         undoImageList.push(img);
     }, false);
-    // img.src = seg_result;
-    img.src = "http://tracer.cs.yale.edu:2018/get_userdata?file=" + seg_result;
+    img.src = seg_result;
+    // img.src = "http://tracer.cs.yale.edu:2018/get_userdata?file=" + seg_result;
 }
 
 
@@ -1440,15 +1441,15 @@ $("#setseg_button").click(function() {
     // REMOVE testing
     // filename = "../PATH/seg_40_0.015000_20_9_";
     $.ajax({
-        // url: filename + "index.csv"
-        url: "http://tracer.cs.yale.edu:2018/get_userdata?file=" + filename + "index.csv"
+        url: filename + "index.csv"
+        // url: "http://tracer.cs.yale.edu:2018/get_userdata?file=" + filename + "index.csv"
     }).done(function(data) {
         readSegments(data);
     });
 
     $.ajax({
-        // url: filename + "feature.csv"
-        url: "http://tracer.cs.yale.edu:2018/get_userdata?file=" + filename + "feature.csv"
+        url: filename + "feature.csv"
+        // url: "http://tracer.cs.yale.edu:2018/get_userdata?file=" + filename + "feature.csv"
     }).done(function(data) {
         readSegmentsInfo(data);
     });
