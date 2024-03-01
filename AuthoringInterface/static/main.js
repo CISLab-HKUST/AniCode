@@ -266,7 +266,8 @@ function uploadImage() {
     //     scene_name = "demo_test/";
     // }
     // scene_name = "demo_test/";
-    scene_name = "./static/userdata_127.0.0.1/";
+
+    scene_name = document.getElementById("foldername").value
     uploadedImage.src = scene_name + "img_author.png";
     // uploadedImage.src = "http://tracer.cs.yale.edu:2018/get_userdata?file=img_author.png";
     // TODO random ordering of 5 examples
