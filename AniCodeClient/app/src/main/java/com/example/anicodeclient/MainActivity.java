@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +17,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import androidx.core.app.ActivityCompat;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
