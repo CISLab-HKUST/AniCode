@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
@@ -68,21 +69,22 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Vie
 
     // Storage Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
+    private static final String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
     };
     public static void verifyStoragePermissions(Activity activity) {
-        // Check if we have write permission
-        int read_permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int write_permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (read_permission != PackageManager.PERMISSION_GRANTED || write_permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
+        for (int i = 0; i < PERMISSIONS_STORAGE.length;i++) {
+            int checkPermission = ContextCompat.checkSelfPermission(activity, PERMISSIONS_STORAGE[i]);
+            if (checkPermission != PackageManager.PERMISSION_GRANTED) {
+                // We don't have permission so prompt the user
+                ActivityCompat.requestPermissions(
+                        activity,
+                        PERMISSIONS_STORAGE,
+                        REQUEST_EXTERNAL_STORAGE
+                );
+            }
         }
     }
 
@@ -267,6 +269,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Vie
 //            Log.i(TAG, "rowEnd: " + String.valueOf(mQRCodeBox[1]));
 //            Log.i(TAG, "colStart: " + String.valueOf(mQRCodeBox[2]));
 //            Log.i(TAG, "colEnd: " + String.valueOf(mQRCodeBox[3]));
+        } else {
+            return null;
         }
         Bitmap bMap = Bitmap.createBitmap(mQRCodeBox[3] - mQRCodeBox[2], mQRCodeBox[1] - mQRCodeBox[0], Bitmap.Config.ARGB_8888); // width, height
         Utils.matToBitmap(mRgba.submat(mQRCodeBox[0], mQRCodeBox[1], mQRCodeBox[2], mQRCodeBox[3]), bMap);
