@@ -21,10 +21,13 @@ import android.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.FormatException;
 import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Reader;
@@ -62,8 +65,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class MainActivity extends Activity implements CvCameraViewListener2, View.OnTouchListener {
 
@@ -89,8 +94,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Vie
     }
 
     private static final String TAG = "MainActivity";
-    private static final int res_width = 1600;
-    private static final int res_height = 1200;
+    private static final int res_width = 1440;
+    private static final int res_height = 1080;
     private static final int res_low_width = 640;
     private static final int res_low_height = 480;
     private static final float calibration_error_threshold = 5 * res_width / res_low_width;
@@ -201,7 +206,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Vie
         // On Samsung S8: mOpenCvCameraView.getResolutionList().get(1) is 1440x1080
         // On Pixel 2 XL: mOpenCvCameraView.getResolutionList().get(1) is 1600x1200
         Camera.Size resolution = mOpenCvCameraView.getResolutionList().get(1);
-//        Log.e(TAG, "RES: "+ resolution.height + " " + resolution.width);
+        Log.e(TAG, "RES: "+ resolution.height + " " + resolution.width);
 //        for (int i = 0; i < mOpenCvCameraView.getResolutionList().size(); i++) {
 //            Log.e(TAG, "List " + i + ": " + mOpenCvCameraView.getResolutionList().get(i).height + " " + mOpenCvCameraView.getResolutionList().get(i).width);
 //        }
@@ -265,33 +270,46 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Vie
             mQRCodeBox[1] = Math.min(mQRCodeBox[1], (int) Math.max(Math.max(mLandmarks[1], mLandmarks[3]), Math.max(mLandmarks[5], mLandmarks[7])) + 100);
             mQRCodeBox[2] = Math.max(mQRCodeBox[2], (int) Math.min(Math.min(mLandmarks[0], mLandmarks[2]), Math.min(mLandmarks[4], mLandmarks[6])) - 100);
             mQRCodeBox[3] = Math.min(mQRCodeBox[3], (int) Math.max(Math.max(mLandmarks[0], mLandmarks[2]), Math.max(mLandmarks[4], mLandmarks[6])) + 100);
-//            Log.i(TAG, "rowStart: " + String.valueOf(mQRCodeBox[0]));
-//            Log.i(TAG, "rowEnd: " + String.valueOf(mQRCodeBox[1]));
-//            Log.i(TAG, "colStart: " + String.valueOf(mQRCodeBox[2]));
-//            Log.i(TAG, "colEnd: " + String.valueOf(mQRCodeBox[3]));
-        } else {
+        }
+        if (mQRCodeBox[0] < 0 || mQRCodeBox[1] > mRgba.height() || mQRCodeBox[2] < 0 || mQRCodeBox[3] > mRgba.width()) {
+            Log.e(TAG, Arrays.toString(mQRCodeBox));
+            Log.e(TAG, "mRgba: {" + mRgba.height() +
+                    ", " + mRgba.width() +
+                    "}");
             return null;
         }
         Bitmap bMap = Bitmap.createBitmap(mQRCodeBox[3] - mQRCodeBox[2], mQRCodeBox[1] - mQRCodeBox[0], Bitmap.Config.ARGB_8888); // width, height
+//        Log.i(TAG, "bMap: " + bMap.getWidth() + bMap.getHeight());
         Utils.matToBitmap(mRgba.submat(mQRCodeBox[0], mQRCodeBox[1], mQRCodeBox[2], mQRCodeBox[3]), bMap);
         int[] intArray = new int[bMap.getWidth() * bMap.getHeight()];
         // Copy pixel data from the Bitmap into the 'intArray' array
         bMap.getPixels(intArray, 0, bMap.getWidth(), 0, 0, bMap.getWidth(), bMap.getHeight());
         LuminanceSource source = new RGBLuminanceSource(bMap.getWidth(), bMap.getHeight(),intArray);
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-        Reader reader = new QRCodeReader();
-//        Hashtable<DecodeHintType, Object> hints = new Hashtable<DecodeHintType, Object>();
-//        hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
-//        hints.put(DecodeHintType.PURE_BARCODE, Boolean.TRUE);
+
+        Vector<BarcodeFormat> decodeFormats = new Vector<>();
+
+        decodeFormats.add(BarcodeFormat.QR_CODE);
+
+        MultiFormatReader reader = new MultiFormatReader();
+
+        Hashtable<DecodeHintType, Object> hints = new Hashtable<DecodeHintType, Object>();
+        hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
+        hints.put(DecodeHintType.PURE_BARCODE, Boolean.TRUE);
+        hints.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats );
+
+        reader.setHints(hints);
+
         try {
             return reader.decode(bitmap);
         }
         catch (NotFoundException e) {
-            Log.e(TAG, "Code Not Found");
-            e.printStackTrace();
+//            Log.e(TAG, "Code Not Found");
+//            e.printStackTrace();
         }
         return null;
     }
+
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
@@ -342,8 +360,22 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Vie
                         mIsQREverDetected = true;
 
                         // Write decoded QR information to file
-                        File fileNameQRText = new File(Environment.getExternalStorageDirectory().getPath() +
-                                "/AnimationProject/", "qr_decoded.txt");
+                        // Define the directory path
+                        String directoryPath = Environment.getExternalStorageDirectory().getPath() + "/AnimationProject/";
+
+                        // Create the directory if it doesn't exist
+                        File directory = new File(directoryPath);
+                        if (!directory.exists()) {
+                            if (!directory.mkdirs()) {
+                                Log.e("Error", "Failed to create directory: " + directoryPath);
+                                return null; // Exit method if directory creation fails
+                            }
+                        }
+
+                        // Define the file path
+                        File fileNameQRText = new File(directory, "qr_decoded.txt");
+
+                        // Write decoded QR information to the file
                         try {
                             fileNameQRText.createNewFile();
                             FileOutputStream fout = new FileOutputStream(fileNameQRText);
@@ -352,8 +384,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2, Vie
                             outWriter.close();
                             fout.flush();
                             fout.close();
-                        }
-                        catch (IOException e) {
+                            Log.d("Success", "QR information written to file: " + fileNameQRText.getAbsolutePath());
+                        } catch (IOException e) {
                             Log.e("Exception", "File write failed: " + e.toString());
                         }
 
