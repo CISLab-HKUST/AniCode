@@ -63,7 +63,8 @@ def authoring():
         cv2.imwrite(foldername + "img_author.png", img)
         # detect QR code
         reader = BarCodeReader()
-        barcode = reader.decode(foldername + "img_author.png")
+        path = foldername + "img_author.png"
+        barcode = reader.decode(path)
         barcode_data = barcode[0]
         if barcode_data is None or 'points' not in barcode_data.keys():
             flash("Reference QR undetectable! Please print a bigger QR code and take the picture again.")
