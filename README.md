@@ -8,6 +8,6 @@ Published in the Visual Computer and presented at Computer Graphics Internationa
 
 ![teaser](teaser.jpg)
 
-This repository contains source code of AniCode's authoring interface and client application.
+This repository contains source code of AniCode's [authoring interface](./AuthoringInterface) and [client application](./AniCodeClient).
 
 A live demo is available at http://tracer.cs.yale.edu/AniCode.

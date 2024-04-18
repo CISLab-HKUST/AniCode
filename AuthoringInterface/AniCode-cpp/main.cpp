@@ -51,27 +51,6 @@ using namespace cv::ximgproc;
 #endif
 
 enum Functionality{AUTHOR_TAKING_PIC, VIEWER_TAKING_PIC, ANIMATING, SEGMENTATION};
-/***
-To build the binary segment
-    set active_functionality to SEGMENTATION
-    uncomment lines 83-87, comment lines 73-82
-    set is_matching to false in line 129
-    run cmake . and make
-    rename anicode to segment
-
-To build the binary match
-    set active_functionality to SEGMENTATION
-    uncomment lines 78-82, comment lines 73-77 and 83-87
-    set is_matching to true in line 129
-    run cmake . and make
-    rename anicode to match
-
-To build the binary animate
-    set active_functionality to ANIMATING
-    uncomment lines 73-77, comment lines 78-87
-    run cmake . and make
-    rename anicode to animate
- ***/
 int main(int argc, char** argv) {
     string directory = "";
 
@@ -122,24 +101,6 @@ int main(int argc, char** argv) {
             break;
     }
 
-    // if (argc != 4) {
-    //     cerr << "Usage: ./animate src_img.png qr.txt dst_video.avi" << endl;
-    //     cerr << "Only works for files in the current folder due to the path of masks!" << endl;
-    //     return -1;
-    // }
-    // if (argc != 3) {
-    //     cerr << "Usage: ./match src_img.jpg qr.txt" << endl;
-    //     cerr << "Only works for files in the current folder due to the path of masks!" << endl;
-    //     return -1;
-    // }
-    // if (argc != 2 && argc != 8) {
-    //    cerr << "Usage: ./segment src_img.jpg" << endl;
-    //    cerr << "Optionally set the range for parameters: ./segment src_img.jpg region_size_from region_size_to ratio_from ratio_to num_iterations_from num_iterations_to" << endl;
-    //    return -1;
-    // }
-//        directory = "/Users/wangzeyu/Desktop/AuthoringAnimation/AnimationDemo/";
-//        cout << "Please specify a functionality code\n0: author takes picture,\n1: viewer takes picture,\n2: generate animation,\n3: image segmentation\n";
-//        cin >> active_functionality;
     if (active_functionality == AUTHOR_TAKING_PIC) {
         // Capture an image when the author presses 'C' as long as a QR code is detecable
         // The image that the author takes will be saved according to the following path
