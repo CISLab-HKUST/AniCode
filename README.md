@@ -10,4 +10,6 @@ Published in the Visual Computer and presented at Computer Graphics Internationa
 
 This repository contains source code of AniCode's [authoring interface](./AuthoringInterface) and [client application](./AniCodeClient).
 
+You can download the Client APP from [Release](https://github.com/CISLab-HKUST/AniCode/releases/tag/1.0.0).
+
 A live demo is available at http://tracer.cs.yale.edu/AniCode.
