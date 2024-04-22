@@ -1,6 +1,6 @@
 # AniCode Authoring Interface
 
-This is the source code of the live [demo](http://tracer.cs.yale.edu/AniCode).
+This is the source code of the live [demo](https://cislab.hkust-gz.edu.cn/projects/anicode/).
 
 Run `python3 server.py` to start the Flask server.
 
