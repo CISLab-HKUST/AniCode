@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, send_from_directory, abort
 from werkzeug.utils import secure_filename
+from werkzeug.middleware.proxy_fix import ProxyFix
 import cv2
 import os
 # import zxing
@@ -17,7 +18,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # spec.loader.exec_module(zxing)
 
 app = Flask(__name__)
-
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
 
 # cors = CORS(app)
 # app.config["CORS_HEADERS"] = "Content-Type"
@@ -65,6 +66,9 @@ def authoring():
         reader = BarCodeReader()
         path = foldername + "img_author.png"
         barcode = reader.decode(path)
+        if barcode is None:
+            flash("Reference QR undetectable! Please print a bigger QR code and take the picture again.")
+            return redirect(url_for("upload"))
         barcode_data = barcode[0]
         if barcode_data is None or 'points' not in barcode_data.keys():
             flash("Reference QR undetectable! Please print a bigger QR code and take the picture again.")
@@ -105,4 +109,4 @@ def get_userdata():
     return send_from_directory("./userdata_%s/" % request.remote_addr, request.args.get('file'))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", threaded=True, debug=True, port=2018)
+    app.run(host="0.0.0.0", threaded=True, debug=True, port=10000)

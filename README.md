@@ -12,4 +12,4 @@ This repository contains source code of AniCode's [authoring interface](./Author
 
 You can download the Client APP from [Release](https://github.com/CISLab-HKUST/AniCode/releases/tag/1.0.0).
 
-A live demo is available at http://tracer.cs.yale.edu/AniCode.
+A live demo is available at https://cislab.hkust-gz.edu.cn/projects/anicode/.
