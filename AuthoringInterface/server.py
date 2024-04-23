@@ -20,6 +20,14 @@ ssl._create_default_https_context = ssl._create_unverified_context
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
 
+SECRET_KEY = os.urandom(24)
+app.config['SECRET_KEY'] = SECRET_KEY
+env = os.environ.get('FLASK_ENV', 'development')
+if env == 'production':
+    app.config['APPLICATION_ROOT'] = '/projects/anicode'
+else:
+    app.config['APPLICATION_ROOT'] = ''
+
 # cors = CORS(app)
 # app.config["CORS_HEADERS"] = "Content-Type"
 
@@ -37,6 +45,11 @@ def reference():
 def upload():
     return render_template("upload.html")
 
+
+def handle_undetectable_qr():
+    flash("Reference QR undetectable! Please print a bigger QR code and take the picture again.")
+    root_path = app.config.get('APPLICATION_ROOT', '')
+    return redirect(root_path + '/upload')
 
 @app.route("/authoring", methods=["GET", "POST"])
 def authoring():
@@ -68,11 +81,10 @@ def authoring():
         barcode = reader.decode(path)
         if barcode is None:
             flash("Reference QR undetectable! Please print a bigger QR code and take the picture again.")
-            return redirect(url_for("upload"))
+            return handle_undetectable_qr()
         barcode_data = barcode[0]
         if barcode_data is None or 'points' not in barcode_data.keys():
-            flash("Reference QR undetectable! Please print a bigger QR code and take the picture again.")
-            return redirect(url_for("upload"))
+            return handle_undetectable_qr()
         points = barcode_data['points']
         qrpoints = [points[0][0], points[0][1], points[1][0], points[1][1], points[2][0], points[2][1], points[3][0],
                     points[3][1]]
@@ -87,8 +99,7 @@ def authoring():
         os.system("cp ./AniCode-cpp/animate ./%s" % foldername)
         os.system("cd %s && ./segment img_author.png" % foldername)
         return render_template("authoring.html", qr_landmarks=" ".join(qrpoints), foldername=foldername)
-    return redirect("upload")
-
+    return handle_undetectable_qr()
 
 @app.route("/finish", methods=["GET", "POST"])
 def finish():
